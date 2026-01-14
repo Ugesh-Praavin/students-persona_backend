@@ -3,101 +3,150 @@ import { PersonalityTrait } from 'src/common/enum/personality-trait.enum';
 import { Question } from '../interface/question.interface';
 
 export const RITVERSE_QUESTIONS: Question[] = [
-  // 🧠 PLANET 2 — NEUTRON (Brain Planet)
+  // 🧠 PLANET 2 — NEUTRON (How You Think – FUN VERSION)
   {
     id: 1,
     planet: 'NEUTRON',
-    text: '🚀 Which subjects do you enjoy learning?',
+    text: '🧩 You get a new gadget with NO instructions. What do you do?',
     multiSelect: true,
-    maxSelect: 3,
+    maxSelect: 2,
     options: {
-      A: { text: '➗ Maths', mapsTo: [InterestBucket.LOGICAL] },
-      B: { text: '🔬 Science', mapsTo: [InterestBucket.LOGICAL] },
-      C: { text: '💻 Computers', mapsTo: [InterestBucket.LOGICAL] },
-      D: { text: '📚 English ', mapsTo: [InterestBucket.CREATIVE] },
-      E: { text: '✨ Social', mapsTo: [InterestBucket.CREATIVE] },
-      F: { text: '🏅 Sports', mapsTo: [InterestBucket.CREATIVE] },
+      A: {
+        text: '🔍 Press buttons and explore',
+        mapsTo: [InterestBucket.LOGICAL],
+      },
+      B: {
+        text: '📺 Watch a video about it',
+        mapsTo: [PersonalityTrait.PEOPLE_FRIENDLY],
+      },
+      C: {
+        text: '📖 Read instructions carefully',
+        mapsTo: [PersonalityTrait.PLANNED],
+      },
+      D: { text: '🤝 Ask someone to explain', mapsTo: [InterestBucket.SOCIAL] },
+      E: {
+        text: '😄 Try randomly and have fun',
+        mapsTo: [PersonalityTrait.FLEXIBLE],
+      },
     },
   },
 
   {
     id: 2,
     planet: 'NEUTRON',
-    text: '📘 How do you learn best?',
+    text: '🧠 A puzzle feels impossible at first. You usually…',
     multiSelect: false,
     options: {
       A: {
-        text: '🎮 By trying it myself',
-        mapsTo: [PersonalityTrait.INDEPENDENT],
+        text: '🤔 Try again in a different way',
+        mapsTo: [InterestBucket.LOGICAL],
       },
-      B: {
-        text: '👀 By watching videos',
-        mapsTo: [PersonalityTrait.PEOPLE_FRIENDLY],
+      B: { text: '🙋 Ask someone for help', mapsTo: [InterestBucket.SOCIAL] },
+      C: {
+        text: '😄 Take a break and come back later',
+        mapsTo: [PersonalityTrait.FLEXIBLE],
       },
-      C: { text: '📖 By reading books', mapsTo: [PersonalityTrait.PLANNED] },
-      D: {
-        text: '👂 By listening to explanations',
-        mapsTo: [PersonalityTrait.PEOPLE_FRIENDLY],
-      },
+      D: { text: '🎮 Turn it into a game', mapsTo: [InterestBucket.CREATIVE] },
     },
   },
 
-  // 🎨 PLANET 3 — TALENT NEBULA (Highest Weight ⭐)
+  // 🎨 PLANET 3 — TALENT NEBULA (What You LOVE Doing ⭐)
   {
     id: 3,
     planet: 'TALENT',
-    text: '🎨 What do you enjoy doing the MOST in your free time?',
+    text: '🎉 You get a full day with NO homework. What sounds the most fun?',
     multiSelect: false,
     options: {
-      A: { text: '🎨 Drawing or creating', mapsTo: [InterestBucket.CREATIVE] },
-      B: { text: '⚽ Playing sports', mapsTo: [InterestBucket.PRACTICAL] },
-      C: { text: '💻 Using tech or games', mapsTo: [InterestBucket.LOGICAL] },
-      D: { text: '🎤 Talking or leading', mapsTo: [InterestBucket.LEADERSHIP] },
+      A: {
+        text: '🎨 Drawing, crafting, creating',
+        mapsTo: [InterestBucket.CREATIVE],
+      },
+      B: {
+        text: '⚽ Playing games or sports',
+        mapsTo: [InterestBucket.PRACTICAL],
+      },
+      C: {
+        text: '🎮 Games, puzzles, or tech fun',
+        mapsTo: [InterestBucket.LOGICAL],
+      },
+      D: {
+        text: '🎤 Talking, performing, leading',
+        mapsTo: [InterestBucket.LEADERSHIP],
+      },
     },
   },
 
   {
     id: 4,
     planet: 'TALENT',
-    text: '⏳ Which activities make you forget time?',
+    text: '⏳ Which activities make you forget time completely?',
     multiSelect: true,
-    maxSelect: 3,
+    maxSelect: 2,
     options: {
-      A: { text: '🎨 Creating things', mapsTo: [InterestBucket.CREATIVE] },
-      B: { text: '🎮 Strategy or puzzles', mapsTo: [InterestBucket.LOGICAL] },
-      C: { text: '🤝 Helping people', mapsTo: [InterestBucket.SOCIAL] },
-      D: { text: '🛠 Building or fixing', mapsTo: [InterestBucket.PRACTICAL] },
+      A: {
+        text: '🎨 Creating or designing things',
+        mapsTo: [InterestBucket.CREATIVE],
+      },
+      B: {
+        text: '🧠 Strategy games or puzzles',
+        mapsTo: [InterestBucket.LOGICAL],
+      },
+      C: {
+        text: '🤝 Helping friends or people',
+        mapsTo: [InterestBucket.SOCIAL],
+      },
+      D: {
+        text: '🛠 Building or fixing stuff',
+        mapsTo: [InterestBucket.PRACTICAL],
+      },
       E: {
-        text: '🧑‍🚀 Organising or leading',
+        text: '🧑‍🚀 Organising or leading groups',
         mapsTo: [InterestBucket.LEADERSHIP],
       },
     },
   },
 
-  // 🧩 PLANET 4 — ORBIT-X (Personality Layer)
+  // 🧩 PLANET 4 — ORBIT-X (How You Act)
   {
     id: 5,
     planet: 'ORBIT',
-    text: '🤝 You prefer working…',
+    text: '🎮 In a group game, you usually…',
     multiSelect: false,
     options: {
-      A: { text: '👥 With a team', mapsTo: [PersonalityTrait.PEOPLE_FRIENDLY] },
-      B: { text: '👤 On my own', mapsTo: [PersonalityTrait.INDEPENDENT] },
-      C: { text: '🔁 Both', mapsTo: [] },
+      A: {
+        text: '👑 Take charge and lead',
+        mapsTo: [InterestBucket.LEADERSHIP],
+      },
+      B: {
+        text: '🤝 Support and help others',
+        mapsTo: [InterestBucket.SOCIAL],
+      },
+      C: {
+        text: '💭 Think quietly and focus',
+        mapsTo: [PersonalityTrait.INDEPENDENT],
+      },
+      D: {
+        text: '🎉 Keep the energy high',
+        mapsTo: [PersonalityTrait.PEOPLE_FRIENDLY],
+      },
     },
   },
 
   {
     id: 6,
     planet: 'ORBIT',
-    text: '📋 When something new starts, you usually…',
+    text: '⚡ Plans suddenly change. How do you feel?',
     multiSelect: false,
     options: {
       A: {
-        text: '📋 Plan everything first',
+        text: '😄 Excited – let’s go!',
+        mapsTo: [PersonalityTrait.FLEXIBLE],
+      },
+      B: { text: '😐 Okay, I can manage', mapsTo: [] },
+      C: {
+        text: '😟 Uncomfortable, I need time',
         mapsTo: [PersonalityTrait.PLANNED],
       },
-      B: { text: '⚡ Jump in and adapt', mapsTo: [PersonalityTrait.FLEXIBLE] },
     },
   },
 
@@ -105,33 +154,48 @@ export const RITVERSE_QUESTIONS: Question[] = [
   {
     id: 7,
     planet: 'FUTURIA',
-    text: '🌟 Which future mission excites you the MOST?',
+    text: '🚀 If you were sent on a space mission, which role sounds coolest?',
     multiSelect: false,
     options: {
-      A: { text: '🛠 Building things', mapsTo: [InterestBucket.PRACTICAL] },
-      B: { text: '🤍 Helping people', mapsTo: [InterestBucket.SOCIAL] },
-      C: { text: '🎥 Creating content', mapsTo: [InterestBucket.CREATIVE] },
-      D: { text: '🧠 Exploring technology', mapsTo: [InterestBucket.LOGICAL] },
-      E: { text: '👑 Leading teams', mapsTo: [InterestBucket.LEADERSHIP] },
+      A: { text: '🛠 Build cool things', mapsTo: [InterestBucket.PRACTICAL] },
+      B: {
+        text: '🤍 Help people on the mission',
+        mapsTo: [InterestBucket.SOCIAL],
+      },
+      C: {
+        text: '🎥 Create videos or stories',
+        mapsTo: [InterestBucket.CREATIVE],
+      },
+      D: {
+        text: '🧠 Explore new technology',
+        mapsTo: [InterestBucket.LOGICAL],
+      },
+      E: {
+        text: '👑 Lead the whole team',
+        mapsTo: [InterestBucket.LEADERSHIP],
+      },
     },
   },
 
   {
     id: 8,
     planet: 'FUTURIA',
-    text: '💬 What do you want your future self to say?',
+    text: '💌 Your future self sends you a message. Which one do you like most?',
     multiSelect: false,
     options: {
       A: {
-        text: '“I never stopped learning.”',
+        text: '“You never stopped learning.”',
         mapsTo: [InterestBucket.LOGICAL],
       },
       B: {
-        text: '“I created amazing things.”',
+        text: '“You created amazing things.”',
         mapsTo: [InterestBucket.CREATIVE],
       },
-      C: { text: '“I helped many people.”', mapsTo: [InterestBucket.SOCIAL] },
-      D: { text: '“I led great teams.”', mapsTo: [InterestBucket.LEADERSHIP] },
+      C: { text: '“You helped many people.”', mapsTo: [InterestBucket.SOCIAL] },
+      D: {
+        text: '“You led great teams.”',
+        mapsTo: [InterestBucket.LEADERSHIP],
+      },
     },
   },
 ];
