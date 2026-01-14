@@ -1,0 +1,6 @@
+export enum PersonalityTrait {
+  PEOPLE_FRIENDLY = 'PEOPLE_FRIENDLY',
+  INDEPENDENT = 'INDEPENDENT',
+  PLANNED = 'PLANNED',
+  FLEXIBLE = 'FLEXIBLE',
+}
