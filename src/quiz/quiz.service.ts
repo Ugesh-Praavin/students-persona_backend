@@ -24,16 +24,20 @@ export class QuizService {
         throw new BadRequestException('Invalid question ID');
       }
 
-      for (const selected of answer.selectedOptions) {
-        const option = question.options[selected];
+      for (const selectedKey of answer.selectedOptions) {
+        const option = question.options[selectedKey];
+
         if (!option) {
-          throw new BadRequestException('Invalid option');
+          throw new BadRequestException(
+            `Invalid option ${selectedKey} for question ${question.id}`,
+          );
         }
 
         for (const tag of option.mapsTo) {
           if (Object.values(InterestBucket).includes(tag as InterestBucket)) {
             interestScores[tag as InterestBucket] += 1;
           }
+
           if (
             Object.values(PersonalityTrait).includes(tag as PersonalityTrait)
           ) {
@@ -41,26 +45,10 @@ export class QuizService {
           }
         }
       }
-
-      if (!option) {
-        throw new BadRequestException('Invalid option');
-      }
-
-      for (const tag of option.mapsTo) {
-        if (Object.values(InterestBucket).includes(tag as InterestBucket)) {
-          interestScores[tag as InterestBucket] += 1;
-        }
-
-        if (Object.values(PersonalityTrait).includes(tag as PersonalityTrait)) {
-          traits.add(tag as PersonalityTrait);
-        }
-      }
     }
 
-    // 🎓 Generate Explorer Pass
     const pass = generateExplorerPass(interestScores, Array.from(traits));
 
-    // 📊 Save to Google Sheets (non-blocking)
     this.sheetsService.addStudent({
       ...dto.student,
       careerPath: pass.careerPath,
@@ -68,7 +56,6 @@ export class QuizService {
       skills: pass.skills,
     });
 
-    // 🪪 Return pass to frontend
     return pass;
   }
 }
