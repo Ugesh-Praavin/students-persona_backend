@@ -35,7 +35,15 @@ export class QuizService {
 
         for (const tag of option.mapsTo) {
           if (Object.values(InterestBucket).includes(tag as InterestBucket)) {
-            interestScores[tag as InterestBucket] += 1;
+            const PLANET_WEIGHT: Record<string, number> = {
+              NEUTRON: 1,
+              TALENT: 2, // ⭐ most important
+              ORBIT: 1,
+              FUTURIA: 1.5, // dreams matter
+            };
+
+            const weight = PLANET_WEIGHT[question.planet] ?? 1;
+            interestScores[tag as InterestBucket] += weight;
           }
 
           if (
