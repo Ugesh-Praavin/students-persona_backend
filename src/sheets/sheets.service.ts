@@ -1,6 +1,8 @@
+// sheets.service.ts
 import { google, sheets_v4 } from 'googleapis';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+
 import 'dotenv/config';
 import { AddStudentDto } from './students.dto';
 
@@ -8,6 +10,7 @@ import { AddStudentDto } from './students.dto';
 export class SheetsService {
   private sheets: sheets_v4.Sheets;
   private buffer: AddStudentDto[] = [];
+
   private flushing = false;
   private readonly BATCH_SIZE = 10;
 
@@ -32,22 +35,30 @@ export class SheetsService {
 
   addStudent(data: AddStudentDto) {
     if (process.env.DEMO_MODE === 'true') {
-      return { message: 'Demo submission successful' };
+      return {
+        message: 'Demo submission successful',
+      };
     }
-
+    // Add to memory buffer
     this.buffer.push(data);
 
+    // Trigger flush if batch size reached
     if (this.buffer.length >= this.BATCH_SIZE) {
-      this.flush().catch(() => {});
+      this.flush().catch(() => {
+        // swallow error – do NOT crash API
+      });
     }
 
-    return { message: 'Student saved for RITverse' };
+    // Respond immediately (important!)
+    return { message: 'Submission received' };
   }
 
   private async flush() {
     if (this.flushing || this.buffer.length === 0) return;
+
     this.flushing = true;
 
+    // Copy current buffer
     const batch = [...this.buffer];
     this.buffer = [];
 
@@ -59,7 +70,6 @@ export class SheetsService {
       d.city,
       d.email,
       d.mobile,
-      d.careerPath,
       d.strengths.join(', '),
       d.skills.join(', '),
       new Date().toISOString(),
@@ -68,14 +78,17 @@ export class SheetsService {
     try {
       await this.sheets.spreadsheets.values.append({
         spreadsheetId: this.configService.get<string>('SHEET_ID'),
-        range: 'Sheet1!A:K',
+        range: 'Sheet1!A:J',
         valueInputOption: 'RAW',
         requestBody: { values },
       });
     } catch (err) {
+      // If Sheets fails, re-queue data
       this.buffer.unshift(...batch);
     } finally {
       this.flushing = false;
     }
   }
 }
+
+//not working

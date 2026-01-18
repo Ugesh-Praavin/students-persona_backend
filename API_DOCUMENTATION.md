@@ -165,7 +165,9 @@ Host: localhost:3000
 **Example JavaScript Fetch:**
 
 ```javascript
-const response = await fetch('http://localhost:3000/question/start');
+const response = await fetch(
+  'https://students-persona-backend.onrender.com/question/start',
+);
 const questions = await response.json();
 console.log(questions);
 ```
@@ -263,22 +265,41 @@ Content-Type: application/json
 ```json
 {
   "status": "APPROVED",
-  "explorerType": "Stem Tech",
-  "careerPath": "STEM_TECH",
-  "strengths": ["Logical thinking", "Problem solving"],
-  "skills": ["Basic coding", "Math practice", "STEM projects"],
-  "message": "You've unlocked entry into RITverse 🌌"
+  "universeRank": "RITverse Explorer",
+  "passTitle": "Tech Explorer 🚀",
+  "badge": "🧠",
+  "powerTraits": ["Problem Solver", "Curious Thinker", "Builder Mindset"],
+  "funSkills": ["Solving puzzles", "Building cool things", "Exploring tech"],
+  "signatureLine": "Powered by curiosity ⚡",
+  "message": "You've unlocked your RITverse Explorer Pass 🌌"
 }
 ```
 
 **Response Fields:**
 
 - `status` (string): Always `"APPROVED"` for successful submissions
-- `explorerType` (string): Human-readable career family name (e.g., `"Stem Tech"`, `"Creative Media"`, `"Education Helping"`, `"Skilled Action"`, `"Business Leadership"`)
-- `careerPath` (string): Career family enum value. Possible values: `"STEM_TECH"`, `"CREATIVE_MEDIA"`, `"EDUCATION_HELPING"`, `"SKILLED_ACTION"`, `"BUSINESS_LEADERSHIP"`
-- `strengths` (string[]): Array of identified strengths based on the career path
-- `skills` (string[]): Array of recommended skills to develop
-- `message` (string): Success message
+- `universeRank` (string): Always `"RITverse Explorer"` - the rank/title in the RITverse universe
+- `passTitle` (string): The explorer pass title based on career path. Possible values:
+  - `"Tech Explorer 🚀"` (STEM_TECH)
+  - `"Creative Star 🎨"` (CREATIVE_MEDIA)
+  - `"Kind Hero 🤍"` (EDUCATION_HELPING)
+  - `"Action Champ 🛠️"` (SKILLED_ACTION)
+  - `"Galaxy Leader 👑"` (BUSINESS_LEADERSHIP)
+- `badge` (string): Emoji badge representing the career path:
+  - `"🧠"` (STEM_TECH)
+  - `"✨"` (CREATIVE_MEDIA)
+  - `"🤝"` (EDUCATION_HELPING)
+  - `"⚡"` (SKILLED_ACTION)
+  - `"🌟"` (BUSINESS_LEADERSHIP)
+- `powerTraits` (string[]): Array of power traits/strengths identified for the student (typically 3 traits)
+- `funSkills` (string[]): Array of fun skills to develop (typically 3 skills)
+- `signatureLine` (string): A signature line/phrase for the explorer pass:
+  - `"Powered by curiosity ⚡"` (STEM_TECH)
+  - `"Creativity unlocked 🎨"` (CREATIVE_MEDIA)
+  - `"Heart of the galaxy 💖"` (EDUCATION_HELPING)
+  - `"Action mode ON 🔥"` (SKILLED_ACTION)
+  - `"Leading the universe 🌌"` (BUSINESS_LEADERSHIP)
+- `message` (string): Success message - Always `"You've unlocked your RITverse Explorer Pass 🌌"`
 
 **Status Codes:**
 
@@ -305,13 +326,16 @@ const submitData = {
   ],
 };
 
-const response = await fetch('http://localhost:3000/quiz/submit', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
+const response = await fetch(
+  'https://students-persona-backend.onrender.com/quiz/submit',
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(submitData),
   },
-  body: JSON.stringify(submitData),
-});
+);
 
 const result = await response.json();
 console.log(result);
@@ -439,13 +463,16 @@ const studentData = {
   skills: ['Basic coding', 'Math practice', 'STEM projects'],
 };
 
-const response = await fetch('http://localhost:3000/sheets/student', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
+const response = await fetch(
+  'https://students-persona-backend.onrender.com/sheets/student',
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(studentData),
   },
-  body: JSON.stringify(studentData),
-});
+);
 
 const result = await response.json();
 console.log(result);
@@ -508,11 +535,13 @@ interface AnswerDto {
 ```typescript
 interface ExplorerPass {
   status: 'APPROVED';
-  explorerType: string;
-  careerPath: string;
-  strengths: string[];
-  skills: string[];
-  message: string;
+  universeRank: string; // Always "RITverse Explorer"
+  passTitle: string; // e.g., "Tech Explorer 🚀", "Creative Star 🎨"
+  badge: string; // Emoji badge: "🧠", "✨", "🤝", "⚡", "🌟"
+  powerTraits: string[]; // Array of power traits/strengths
+  funSkills: string[]; // Array of fun skills to develop
+  signatureLine: string; // Signature phrase for the pass
+  message: string; // Success message
 }
 ```
 
@@ -563,13 +592,13 @@ enum CareerFamily {
 
 **Career Family Mappings:**
 
-| Career Family         | Explorer Type Display | Interests          | Traits          | Strengths                         | Skills                                     |
-| --------------------- | --------------------- | ------------------ | --------------- | --------------------------------- | ------------------------------------------ |
-| `STEM_TECH`           | "Stem Tech"           | LOGICAL, PRACTICAL | PLANNED         | Logical thinking, Problem solving | Basic coding, Math practice, STEM projects |
-| `CREATIVE_MEDIA`      | "Creative Media"      | CREATIVE           | FLEXIBLE        | Imagination, Visual creativity    | Drawing, Canva, Content creation           |
-| `EDUCATION_HELPING`   | "Education Helping"   | SOCIAL             | PEOPLE_FRIENDLY | Empathy, Communication            | Explaining concepts, Helping peers         |
-| `SKILLED_ACTION`      | "Skilled Action"      | PRACTICAL          | INDEPENDENT     | Hands-on ability, Focus           | Sports practice, DIY building              |
-| `BUSINESS_LEADERSHIP` | "Business Leadership" | LEADERSHIP         | PLANNED         | Leadership, Decision making       | Public speaking, Event organizing          |
+| Career Family         | Pass Title         | Badge | Interests          | Traits          | Power Traits                                     | Fun Skills                                            | Signature Line          |
+| --------------------- | ------------------ | ----- | ------------------ | --------------- | ------------------------------------------------ | ----------------------------------------------------- | ----------------------- |
+| `STEM_TECH`           | "Tech Explorer 🚀" | 🧠    | LOGICAL, PRACTICAL | PLANNED         | Problem Solver, Curious Thinker, Builder Mindset | Solving puzzles, Building cool things, Exploring tech | Powered by curiosity ⚡ |
+| `CREATIVE_MEDIA`      | "Creative Star 🎨" | ✨    | CREATIVE           | FLEXIBLE        | Imagination, Creativity, Expression              | Drawing, Designing, Creating stories                  | Creativity unlocked 🎨  |
+| `EDUCATION_HELPING`   | "Kind Hero 🤍"     | 🤝    | SOCIAL             | PEOPLE_FRIENDLY | Kindness, Empathy, Support                       | Helping friends, Guiding others, Sharing ideas        | Heart of the galaxy 💖  |
+| `SKILLED_ACTION`      | "Action Champ 🛠️"  | ⚡    | PRACTICAL          | INDEPENDENT     | Energy, Focus, Hands-on Power                    | Sports, Building, Fixing things                       | Action mode ON 🔥       |
+| `BUSINESS_LEADERSHIP` | "Galaxy Leader 👑" | 🌟    | LEADERSHIP         | PLANNED         | Leadership, Confidence, Decision Maker           | Leading teams, Organizing missions, Speaking up       | Leading the universe 🌌 |
 
 ---
 
@@ -686,7 +715,9 @@ Here's a complete example of how to integrate the API in a frontend application:
 // Step 1: Fetch questions
 async function startQuiz() {
   try {
-    const response = await fetch('http://localhost:3000/question/start');
+    const response = await fetch(
+      'https://students-persona-backend.onrender.com/question/start',
+    );
     if (!response.ok) {
       throw new Error('Failed to fetch questions');
     }
@@ -788,7 +819,7 @@ function QuizComponent() {
 
   useEffect(() => {
     // Fetch questions on component mount
-    fetch('http://localhost:3000/question/start')
+    fetch('https://students-persona-backend.onrender.com/question/start')
       .then((res) => res.json())
       .then((data) => setQuestions(data))
       .catch((err) => console.error('Error:', err));
@@ -811,16 +842,19 @@ function QuizComponent() {
         }),
       );
 
-      const response = await fetch('http://localhost:3000/quiz/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        'https://students-persona-backend.onrender.com/quiz/submit',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            student: studentProfile,
+            answers: answersArray,
+          }),
         },
-        body: JSON.stringify({
-          student: studentProfile,
-          answers: answersArray,
-        }),
-      });
+      );
 
       if (!response.ok) {
         const error = await response.json();
@@ -866,26 +900,29 @@ function QuizComponent() {
           ))}
         </div>
       ))}
-
       {/* Submit button */}
       <button onClick={() => handleSubmit(studentProfile)} disabled={loading}>
         {loading ? 'Submitting...' : 'Submit Quiz'}
       </button>
-
-      {/* Display results */}
+      {/* Display results */} //
       {result && (
         <div>
-          <h2>{result.explorerType}</h2>
-          <p>{result.message}</p>
-          <h3>Strengths:</h3>
+          <div>
+            <span style={{ fontSize: '3rem' }}>{result.badge}</span>
+            <h2>{result.passTitle}</h2>
+            <p>{result.universeRank}</p>
+            <p>{result.message}</p>
+            <p style={{ fontStyle: 'italic' }}>{result.signatureLine}</p>
+          </div>
+          <h3>Power Traits:</h3>
           <ul>
-            {result.strengths.map((strength, i) => (
-              <li key={i}>{strength}</li>
+            {result.powerTraits.map((trait, i) => (
+              <li key={i}>{trait}</li>
             ))}
           </ul>
-          <h3>Skills to Develop:</h3>
+          <h3>Fun Skills to Explore:</h3>
           <ul>
-            {result.skills.map((skill, i) => (
+            {result.funSkills.map((skill, i) => (
               <li key={i}>{skill}</li>
             ))}
           </ul>
@@ -920,6 +957,15 @@ export default QuizComponent;
 7. **Rate Limiting:** The `/sheets/student` endpoint is rate-limited. Implement retry logic with exponential backoff if needed.
 
 8. **Demo Mode:** If `DEMO_MODE=true`, the sheets endpoint will return a success message without actually saving to Google Sheets.
+
+9. **Explorer Pass Response:** The `/quiz/submit` endpoint returns an Explorer Pass object with the following structure:
+   - `passTitle`: Display title for the explorer pass (includes emoji)
+   - `badge`: Emoji badge representing the career path
+   - `powerTraits`: Array of 3 power traits/strengths
+   - `funSkills`: Array of 3 fun skills to explore
+   - `signatureLine`: A signature phrase for the pass
+   - `universeRank`: Always "RITverse Explorer"
+   - Use these fields to create an engaging UI for displaying the quiz results
 
 ---
 

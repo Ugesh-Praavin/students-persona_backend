@@ -59,9 +59,9 @@ export class QuizService {
 
     this.sheetsService.addStudent({
       ...dto.student,
-      careerPath: pass.careerPath,
-      strengths: pass.strengths,
-      skills: pass.skills,
+
+      strengths: pass.powerTraits, // ✅ FIX
+      skills: pass.funSkills,
     });
 
     return pass;

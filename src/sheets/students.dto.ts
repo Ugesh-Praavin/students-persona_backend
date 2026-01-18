@@ -1,4 +1,4 @@
-import { IsEmail, IsString } from 'class-validator';
+import { IsArray, IsEmail, IsString } from 'class-validator';
 
 export class AddStudentDto {
   @IsString()
@@ -22,8 +22,11 @@ export class AddStudentDto {
   @IsString()
   mobile: string;
 
-  // Explorer pass fields
-  careerPath: string;
+  @IsArray()
+  @IsString({ each: true })
   strengths: string[];
+
+  @IsArray()
+  @IsString({ each: true })
   skills: string[];
 }
