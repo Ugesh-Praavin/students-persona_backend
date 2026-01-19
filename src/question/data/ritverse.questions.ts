@@ -19,12 +19,8 @@ export const RITVERSE_QUESTIONS: Question[] = [
         text: '📺 Watch a video about it',
         mapsTo: [PersonalityTrait.PEOPLE_FRIENDLY],
       },
-      C: {
-        text: '📖 Read instructions carefully',
-        mapsTo: [PersonalityTrait.PLANNED],
-      },
-      D: { text: '🤝 Ask someone to explain', mapsTo: [InterestBucket.SOCIAL] },
-      E: {
+      C: { text: '🤝 Ask someone to explain', mapsTo: [InterestBucket.SOCIAL] },
+      D: {
         text: '😄 Try randomly and have fun',
         mapsTo: [PersonalityTrait.FLEXIBLE],
       },
